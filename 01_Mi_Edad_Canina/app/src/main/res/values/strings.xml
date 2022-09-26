@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name" translatable="false">Dog Age</string>
+    <string name="result_format">If you were a dog, you would be %d years old</string>
+    <string name="you_have_to_insert_an_age">You have to insert an age.</string>
+    <string name="calculate">Calculate</string>
+    <string name="how_old_are_you">How old are you?</string>
+    <string name="your_age">Your age</string>
+    <string name="alberto_ejemplo">How old are you?</string>
+</resources>

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Registro de Superheroes</string>
+    <string name="nombre_del_superheroe">Nombre del Superheroe</string>
+    <string name="alter_ego">Alter Ego</string>
+    <string name="bio">Bio</string>
+    <string name="descripcion_biogr_fica">Descripcion biográfica</string>
+    <string name="poder">Poder</string>
+    <string name="guardar">Guardar</string>
+</resources>

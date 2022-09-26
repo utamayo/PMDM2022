@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Dog Age</string>
+    <string name="result_format">Si fueras un perro, tu edad sería %d años</string>
+    <string name="you_have_to_insert_an_age">Inserta una edad válida.</string>
+    <string name="calculate">Calcular</string>
+    <string name="how_old_are_you">¿Cuántos años tienes?</string>
+    <string name="your_age">Tu edad</string>
+    <string name="alberto_ejemplo">¿Cuántos años tienes?</string>
+</resources>
