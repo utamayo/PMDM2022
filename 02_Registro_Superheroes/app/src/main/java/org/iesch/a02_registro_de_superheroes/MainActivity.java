@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import org.iesch.a02_registro_de_superheroes.databinding.ActivityMainBinding;
+import org.iesch.a02_registro_de_superheroes.model.SuperHero;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,13 +32,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void abrirDetailActivity( String superheroName,String alterEgo, String bio, float rating) {
 
+        // 4 - Nos creamos un objeto de tipo Superheroe
+        SuperHero superHero = new SuperHero(superheroName,alterEgo,bio,rating);
         //1 - Nos creamos un objeto de tipo Intent
         Intent irADetalle = new Intent(this,DetailActivity.class);
         // 3b - Añadimos al intent TODA LA INFORMACION que queramos pasar
-        irADetalle.putExtra("superhero_name",superheroName );
-        irADetalle.putExtra("alterEgo",alterEgo );
-        irADetalle.putExtra("bio",bio );
-        irADetalle.putExtra("rating",rating );
+        //irADetalle.putExtra("superhero_name",superheroName );
+        //irADetalle.putExtra("alterEgo",alterEgo );
+        //irADetalle.putExtra("bio",bio );
+        //irADetalle.putExtra("rating",rating );
+        irADetalle.putExtra("superHero", superHero);
 
         // 2- Llamamos a startActivity para ir a DetailActivity
         startActivity(irADetalle);
