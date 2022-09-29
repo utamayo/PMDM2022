@@ -2,7 +2,9 @@ package org.iesch.a02_registro_de_superheroes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import org.iesch.a02_registro_de_superheroes.databinding.ActivityMainBinding;
 
@@ -14,5 +16,27 @@ public class MainActivity extends AppCompatActivity {
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         //setContentView(R.layout.activity_main);
         setContentView(binding.getRoot());
+
+        binding.saveButton.setOnClickListener(v -> {
+            //1 - Nos creamos un objeto de tipo Intent
+            Intent irADetalle = new Intent(this,DetailActivity.class);
+            // 2- Llamamos a startActivity para ir a DetailActivity
+            startActivity(irADetalle);
+        });
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

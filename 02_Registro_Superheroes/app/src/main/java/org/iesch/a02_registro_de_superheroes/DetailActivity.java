@@ -15,5 +15,7 @@ public class DetailActivity extends AppCompatActivity {
         ActivityDetailBinding binding = ActivityDetailBinding.inflate(getLayoutInflater());
         //setContentView(R.layout.activity_main);
         setContentView(binding.getRoot());
+
+
     }
 }
