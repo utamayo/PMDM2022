@@ -26,10 +26,11 @@ public class DetailActivity extends AppCompatActivity {
         //String bio = extras.getString("bio");
         //float rating = extras.getFloat("rating");
         // 3 - Utilizamos los valores obtenidos
-        binding.nombreHeroeText.setText(superHero.getName());
-        binding.textView3.setText(superHero.getAlterEgo());
-        binding.textView4.setText(superHero.getBio());
-        binding.ratingBar.setRating(superHero.getPower());
+        //binding.nombreHeroeText.setText(superHero.getName());
+        //binding.textView3.setText(superHero.getAlterEgo());
+        //binding.textView4.setText(superHero.getBio());
+        //binding.ratingBar.setRating(superHero.getPower());
+        binding.setSuperhero(superHero);
 
 
     }
