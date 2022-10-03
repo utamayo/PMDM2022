@@ -1,5 +1,9 @@
 package org.iesch.a02_registro_de_superheroes;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +22,28 @@ public class MainActivity extends AppCompatActivity {
 
     private Bitmap foto;
     private ActivityMainBinding binding;
+
+
+    ///// SOLUCIONAMOS EL DEPRECATED//////
+    ActivityResultLauncher<Intent> lanzarCamaraDeFotosActivity = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    // 9 - Si hacemos click en el "back" de la camara recibiremos un result_CANCEL, y si hacemos la foto un RESULT_OK
+                    if ( result.getResultCode() == Activity.RESULT_OK )
+                    {
+                        // Comprobar que al volver de la camara tenemos foto
+                        Intent data = result.getData();
+                        if (data != null){
+                            foto = data.getExtras().getParcelable("data");
+                            binding.heroImage.setImageBitmap(foto);
+                        }
+                    }
+                }
+            }
+    );
+    ///// FIN SOLUCION DEL DEPRECATED //////
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +76,11 @@ public class MainActivity extends AppCompatActivity {
         // 7 - Vamos a pedir a Android que mira si hay alguna APP que ejecute esa accion.
         // Estas aplicaciones se ponen en el Manifest de la APP
         Intent camaraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(camaraIntent, 1000);
+        //startActivityForResult(camaraIntent, 1000);
+        lanzarCamaraDeFotosActivity.launch(camaraIntent);
     }
-
+    /*
     // 8 - Creo la funcion StartActivityForResult
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -72,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+    */
+
 
     private void abrirDetailActivity(String superheroName, String alterEgo, String bio, float rating) {
 
