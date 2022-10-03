@@ -85,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
         //irADetalle.putExtra("bio",bio );
         //irADetalle.putExtra("rating",rating );
         irADetalle.putExtra("superHero", superHero);
+        // 11 - Añadimos la imagen al intent
+        irADetalle.putExtra("fotoSuperheroe", foto);
 
         // 2- Llamamos a startActivity para ir a DetailActivity
         startActivity(irADetalle);

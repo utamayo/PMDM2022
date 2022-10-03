@@ -2,6 +2,7 @@ package org.iesch.a02_registro_de_superheroes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import org.iesch.a02_registro_de_superheroes.databinding.ActivityDetailBinding;
@@ -20,6 +21,17 @@ public class DetailActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         //  4 - Recibo el Objeto Superhero de extras
         SuperHero superHero = extras.getParcelable("superHero");
+        //  12 - Recibimos la imagen recibida
+        Bitmap bitmap = extras.getParcelable("fotoSuperheroe");
+        if (bitmap != null ){
+            binding.imageView.setImageBitmap(bitmap);
+        }
+
+
+
+
+
+
         // 2 - Creo las variables para obtener los valores del intent desde extras con el valor de la llave
         //String heroName = extras.getString("superhero_name");
         //String alterEgo = extras.getString("alterEgo");
