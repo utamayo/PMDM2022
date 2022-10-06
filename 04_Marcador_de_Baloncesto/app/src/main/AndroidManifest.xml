@@ -14,6 +14,9 @@
         android:theme="@style/Theme.04_Marcador_de_Baloncesto"
         tools:targetApi="31">
         <activity
+            android:name=".ScoreActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
