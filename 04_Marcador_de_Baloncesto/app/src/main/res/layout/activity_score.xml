@@ -1,40 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ScoreActivity">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:gravity="center"
-        android:textSize="24sp"
-        android:textColor="@color/black"
-        android:text="Local vs Visitante" />
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/score_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:padding="16dp"
-        android:gravity="center"
-        android:textSize="72sp"
-        android:textColor="@color/black"
-        tools:text="62 - 48" />
+    <data>
 
-    <TextView
-        android:id="@+id/who_won_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:gravity="center"
-        android:textSize="32sp"
-        android:layout_below="@id/score_text"
-        android:textColor="@color/black"
-        tools:text="Ganó el local" />
+    </data>
 
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ScoreActivity">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:text="Local vs Visitante" />
+
+        <TextView
+            android:id="@+id/score_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="16dp"
+            android:gravity="center"
+            android:textSize="72sp"
+            android:textColor="@color/black"
+            tools:text="62 - 48" />
+
+        <TextView
+            android:id="@+id/who_won_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:layout_below="@id/score_text"
+            android:textColor="@color/black"
+            tools:text="Ganó el local" />
+
+    </RelativeLayout>
+</layout>
