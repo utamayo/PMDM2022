@@ -1,47 +1,47 @@
 package org.iesch.a04_marcador_de_baloncesto;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import org.iesch.a04_marcador_de_baloncesto.databinding.ActivityMainBinding;
+import org.iesch.a04_marcador_de_baloncesto.viewmodel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    // 1 - Creo dos variables para las puntuaciones de cada equipo
-    private int localScore = 0;
-    private int visitorScore = 0;
+    // MVVM 6 - Creamos una variable para poderla utilizar en el MainActivity
+    private MainViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // 2 - Añadimos el binding
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        // 3 - Creo un metodo para cargar los botones
+        // MVVM 7 - El ViewModel se instancia de una manera diferente a otros objetos.
+        // El provider hace cosas internamente. Si giramos el telefono, el provider detectará que ya existe esa clase y no la volverá a crear
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
         setupButtons();
     }
 
+    // MVVM 8 - Tomamos localScore y visitorScore del ViewModel
     private void setupButtons() {
-        // 4 - Me creo un método para restar la puntuación local
+
         binding.localMinusButton.setOnClickListener(v -> {
-            if (localScore > 0 ){
-                localScore--;
-                binding.localScoreText.setText(String.valueOf(localScore));
-            }
+                viewModel.decreaseLocal();
+                binding.localScoreText.setText(String.valueOf(viewModel.getLocalScore()));
         });
 
-        // 5 - Me creo un método para restar la puntuación visitante
         binding.visitorMinusButton.setOnClickListener(v -> {
-            if (localScore > 0 ){
-                visitorScore--;
-                binding.visitorScoreText.setText(String.valueOf(localScore));
-            }
+                viewModel.decreaseVisitor();
+                binding.visitorScoreText.setText(String.valueOf(viewModel.getVisitorScore()));
         });
-        // 6 - Me creo un metodo para sumar la puntuación local
+
         binding.localSumarButton.setOnClickListener(v -> {
             addPointsToScore(1 , true);
         });
@@ -65,28 +65,24 @@ public class MainActivity extends AppCompatActivity {
 
     private void endMatch() {
         Intent intent = new Intent(this, ScoreActivity.class);
-        intent.putExtra("localScore", localScore);
-        intent.putExtra("visitorScore", visitorScore);
+        intent.putExtra("localScore", viewModel.getLocalScore());
+        intent.putExtra("visitorScore", viewModel.getVisitorScore());
         startActivity(intent);
     }
 
-    // 6b
     private void addPointsToScore(int points, boolean isLocal) {
+        viewModel.addPointsToScore(points, isLocal);
         if ( isLocal) {
-            localScore += points;
-            binding.localScoreText.setText(String.valueOf(localScore));
+            binding.localScoreText.setText(String.valueOf(viewModel.getLocalScore()));
         } else  {
-            visitorScore += points;
-            binding.visitorScoreText.setText(String.valueOf(visitorScore));
+            binding.visitorScoreText.setText(String.valueOf(viewModel.getVisitorScore()));
         }
     }
 
-    // 7 - Un boton para resetear los marcadores y pintarlos
     private void resetScores() {
-        localScore = 0;
-        visitorScore = 0;
-        binding.visitorScoreText.setText(String.valueOf(visitorScore));
-        binding.localScoreText.setText(String.valueOf(localScore));
+        viewModel.resetScores();
+        binding.visitorScoreText.setText(String.valueOf(viewModel.getVisitorScore()));
+        binding.localScoreText.setText(String.valueOf(viewModel.getLocalScore()));
     }
 
 }
