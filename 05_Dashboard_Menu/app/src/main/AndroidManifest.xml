@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="org.iesch.a05_dashboard_menu">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.05_Dashboard_Menu"
+        tools:targetApi="31">
+        <activity
+            android:name=".SettingsActivity"
+            android:theme="@style/SettingsTheme"
+            android:exported="false" />
+        <activity
+            android:name=".RestaurantsActivity"
+            android:theme="@style/RestauranteTheme"
+            android:exported="false" />
+        <activity
+            android:name=".MapsActivity"
+            android:theme="@style/MapasTheme"
+            android:exported="false" />
+        <activity
+            android:name=".GalleryActivity"
+            android:theme="@style/GaleriaTheme"
+            android:exported="false" />
+        <activity
+            android:name=".QuizzesActivity"
+            android:theme="@style/QuizzesTheme"
+            android:exported="false" />
+        <activity
+            android:name=".EdadCaninaActivity"
+            android:theme="@style/PerreteTheme"
+            android:exported="false" />
+        <activity
+            android:name=".UsersActivity"
+            android:theme="@style/AmigosTheme"
+            android:exported="false" />
+        <activity
+            android:name=".CalculadoraActivity"
+            android:theme="@style/CalculadoraTheme"
+            android:exported="false" />
+        <activity
+            android:name=".MenuActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
