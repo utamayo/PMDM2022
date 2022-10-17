@@ -13,7 +13,6 @@ import org.iesch.a04_marcador_de_baloncesto.viewmodel.MainViewModel;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    // MVVM 6 - Creamos una variable para poderla utilizar en el MainActivity
     private MainViewModel viewModel;
 
     @Override
@@ -22,24 +21,33 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        // MVVM 7 - El ViewModel se instancia de una manera diferente a otros objetos.
-        // El provider hace cosas internamente. Si giramos el telefono, el provider detectará que ya existe esa clase y no la volverá a crear
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
+        // LIVEDATA 5 - Aqui es donde entran en juego los observers
+        viewModel.getLocalScore().observe(this,localScoreInteger -> {
+            // Este entero es el valor del MutableLiveData que estamos observando
+            binding.localScoreText.setText(String.valueOf(localScoreInteger));
+        });
+        viewModel.getVisitorScore().observe(this,visitorScoreInteger -> {
+            // Este entero es el valor del MutableLiveData que estamos observando
+            binding.visitorScoreText.setText(String.valueOf(visitorScoreInteger));
+        });
+
 
         setupButtons();
     }
 
-    // MVVM 8 - Tomamos localScore y visitorScore del ViewModel
+    // LIVEDATA 6 - Como cuando cambien los valores ya se actualizan los Textview, no necesitamos hacerlo aquí
     private void setupButtons() {
-
+        // Siempre que ocurra un cambio a estos valores, se va a activar su observer y entonces cambiará de valor
         binding.localMinusButton.setOnClickListener(v -> {
                 viewModel.decreaseLocal();
-                binding.localScoreText.setText(String.valueOf(viewModel.getLocalScore()));
+                //binding.localScoreText.setText(String.valueOf(viewModel.getLocalScore()));
         });
 
         binding.visitorMinusButton.setOnClickListener(v -> {
                 viewModel.decreaseVisitor();
-                binding.visitorScoreText.setText(String.valueOf(viewModel.getVisitorScore()));
+                //binding.visitorScoreText.setText(String.valueOf(viewModel.getVisitorScore()));
         });
 
         binding.localSumarButton.setOnClickListener(v -> {
@@ -65,24 +73,26 @@ public class MainActivity extends AppCompatActivity {
 
     private void endMatch() {
         Intent intent = new Intent(this, ScoreActivity.class);
-        intent.putExtra("localScore", viewModel.getLocalScore());
-        intent.putExtra("visitorScore", viewModel.getVisitorScore());
+        intent.putExtra("localScore", viewModel.getLocalScore().getValue());
+        intent.putExtra("visitorScore", viewModel.getVisitorScore().getValue());
         startActivity(intent);
     }
 
     private void addPointsToScore(int points, boolean isLocal) {
         viewModel.addPointsToScore(points, isLocal);
+        /*
         if ( isLocal) {
             binding.localScoreText.setText(String.valueOf(viewModel.getLocalScore()));
         } else  {
             binding.visitorScoreText.setText(String.valueOf(viewModel.getVisitorScore()));
         }
+         */
     }
 
     private void resetScores() {
         viewModel.resetScores();
-        binding.visitorScoreText.setText(String.valueOf(viewModel.getVisitorScore()));
-        binding.localScoreText.setText(String.valueOf(viewModel.getLocalScore()));
+        //binding.visitorScoreText.setText(String.valueOf(viewModel.getVisitorScore()));
+        //binding.localScoreText.setText(String.valueOf(viewModel.getLocalScore()));
     }
 
 }

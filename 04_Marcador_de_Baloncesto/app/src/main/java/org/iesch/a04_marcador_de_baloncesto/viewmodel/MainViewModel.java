@@ -1,43 +1,49 @@
 package org.iesch.a04_marcador_de_baloncesto.viewmodel;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-// MVVM 2 - hemos de extender de ViewModel
 public class MainViewModel extends ViewModel {
 
-    // MVVM 3 - Corto y pego estas variables
-    private int localScore = 0;
-    private int visitorScore = 0;
+    // LIVEDATA 1 - Cambio el tipo de variable
+    private MutableLiveData<Integer> localScore = new MutableLiveData<>();
+    private MutableLiveData<Integer> visitorScore = new MutableLiveData<>();
 
-    public int getLocalScore() {
+    // LIVEDATA 4 - Como se crean a nulo las meto en el constructor para asegurarme de que no sean nulos
+    public MainViewModel() {
+        resetScores();
+    }
+
+    // LIVEDATA 2 - Ahora tengo que leer de esta manera
+    public MutableLiveData<Integer> getLocalScore() {
         return localScore;
     }
 
-    public int getVisitorScore() {
+    public MutableLiveData<Integer> getVisitorScore() {
         return visitorScore;
     }
 
-    // MVVM 4 -  Me traigo los métodos resetScores, addToPoints, pero no debo tocar NADA de los Views
+    // LIVEDATA 3 - He de cambiar la manera de establecer los valores
     public void resetScores() {
-        localScore = 0;
-        visitorScore = 0;
+        localScore.setValue(0);
+        visitorScore.setValue(0);
     }
     public void addPointsToScore(int points, boolean isLocal) {
         if ( isLocal) {
-            localScore += points;
+            localScore.setValue(localScore.getValue() + points);
         } else  {
-            visitorScore += points;
+            visitorScore.setValue(visitorScore.getValue() + points);
         }
     }
-    // MVVM 5 - ME creo los métodos para decrementar el local y el visitante
+
     public void decreaseLocal() {
-        if (localScore > 0 ){
-            localScore--;
+        if (localScore.getValue() > 0 ){
+            localScore.setValue(localScore.getValue() - 1);
         }
     }
     public void decreaseVisitor() {
-        if (visitorScore > 0 ){
-            visitorScore--;
+        if (visitorScore.getValue() > 0 ){
+            visitorScore.setValue(visitorScore.getValue() - 1);
         }
     }
 }
