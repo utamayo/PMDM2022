@@ -14,6 +14,7 @@ import android.widget.Toast;
 import org.iesch.a09_pokeapp.MainActivity;
 import org.iesch.a09_pokeapp.PokemonListAdapter;
 import org.iesch.a09_pokeapp.R;
+import org.iesch.a09_pokeapp.iComunicaFragments;
 import org.iesch.a09_pokeapp.model.Pokemon;
 
 import java.util.ArrayList;
@@ -29,7 +30,9 @@ public class PokemonListFragment extends Fragment {
     private ListView lvPokemon;
     private PokemonListAdapter adaptador;
     private ArrayList<Pokemon> pokemonList = new ArrayList<>();
-    View view;
+    public View view;
+    // declaro la interfaz que voy a utilizar
+    iComunicaFragments interfaz;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -80,16 +83,16 @@ public class PokemonListFragment extends Fragment {
         // 2 - A partir de esta vista vamos a obtener todos los views del fragmento
         lvPokemon = view.findViewById(R.id.listaPokemon);
         // 3 - Traemos el resto de codigo del MainActivity
-        pokemonList.add(new Pokemon("1", "Bulbasaur",Pokemon.Type.PLANT));
-        pokemonList.add(new Pokemon("2", "Ivysaur",Pokemon.Type.PLANT));
-        pokemonList.add(new Pokemon("3", "VenuaSaur",Pokemon.Type.PLANT));
-        pokemonList.add(new Pokemon("4", "Charmander",Pokemon.Type.FIRE));
-        pokemonList.add(new Pokemon("5", "Charmeleon",Pokemon.Type.WATER));
-        pokemonList.add(new Pokemon("6", "Charizard",Pokemon.Type.FIRE));
-        pokemonList.add(new Pokemon("7", "Squirtle",Pokemon.Type.WATER));
-        pokemonList.add(new Pokemon("8", "Blastoise",Pokemon.Type.ELECTRIC));
-        pokemonList.add(new Pokemon("25", "Pikachu",Pokemon.Type.ELECTRIC));
-        pokemonList.add(new Pokemon("26", "Raichu",Pokemon.Type.ELECTRIC));
+        pokemonList.add(new Pokemon("1", "Bulbasaur",Pokemon.Type.PLANT, R.raw.bulbasaur, R.drawable.bulbasaur));
+        pokemonList.add(new Pokemon("2", "Ivysaur",Pokemon.Type.PLANT, R.raw.ivysaur, R.drawable.ivysaur));
+        pokemonList.add(new Pokemon("3", "VenuaSaur",Pokemon.Type.PLANT, R.raw.venuasaur, R.drawable.venusaur));
+        pokemonList.add(new Pokemon("4", "Charmander",Pokemon.Type.FIRE, R.raw.charmander, R.drawable.charmander));
+        pokemonList.add(new Pokemon("5", "Charmeleon",Pokemon.Type.WATER, R.raw.charmeleon, R.drawable.charmeleon));
+        pokemonList.add(new Pokemon("6", "Charizard",Pokemon.Type.FIRE, R.raw.charizard, R.drawable.charizard));
+        pokemonList.add(new Pokemon("7", "Squirtle",Pokemon.Type.WATER, R.raw.squirtle, R.drawable.squirtle));
+        pokemonList.add(new Pokemon("8", "Blastoise",Pokemon.Type.ELECTRIC, R.raw.blastoise, R.drawable.blastoise));
+        pokemonList.add(new Pokemon("25", "Pikachu",Pokemon.Type.ELECTRIC, R.raw.pikachu, R.drawable.pikachu));
+        pokemonList.add(new Pokemon("26", "Raichu",Pokemon.Type.ELECTRIC, R.raw.raichu, R.drawable.raichu));
         // 4 - Cuando nos pida un Context desde un fragmento lo haremos usando getActivity
         adaptador = new PokemonListAdapter(getActivity(), pokemonList, R.id.pokemon_list_fragment);
         lvPokemon.setAdapter(adaptador);
@@ -99,10 +102,12 @@ public class PokemonListFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Pokemon selectedPokemon = (Pokemon) adaptador.getItem(position);
                 if (selectedPokemon != null){
-                    Toast.makeText(getActivity(), selectedPokemon.getName(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), selectedPokemon.getName(), Toast.LENGTH_SHORT).show();
+                    interfaz.enviarPokemon(selectedPokemon);
                 }
             }
         });
+
         return view;
     }
 }

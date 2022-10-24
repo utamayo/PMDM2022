@@ -1,7 +1,9 @@
 package org.iesch.a09_pokeapp.fragments;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -59,6 +61,15 @@ public class DetailFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+    }
+
+    // 9 - Establecemos la imagen que queremos en detalleFragment
+    public void setPokemonImage(int pokemonImageId ){
+        detailImageView.setImageDrawable(ContextCompat.getDrawable(getActivity(),pokemonImageId));
+    }
+    public void playPokemonSound( int pokemonSoundId ){
+        MediaPlayer mediaPlayer = MediaPlayer.create(getActivity(),pokemonSoundId);
+        mediaPlayer.start();
     }
 
     @Override
