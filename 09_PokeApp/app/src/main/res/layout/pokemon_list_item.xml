@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:text="1"/>
     <TextView
         android:id="@+id/pokemon_list_item_name_textView"
@@ -20,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:text="Bulbasaur"/>
     <ImageView
         android:id="@+id/pokemon_list_item_type_image"
