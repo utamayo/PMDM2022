@@ -15,12 +15,13 @@ public class Pokemon {
         FIRE, WATER, PLANT, ELECTRIC
     }
 
-    public Pokemon(String id, String name, Type type, int imageId, int soundId) {
+    public Pokemon(String id, String name, Type type, int soundId, int imageId) {
         this.id = id;
         this.name = name;
         this.type = type;
-        this.imageId = imageId;
         this.soundId = soundId;
+        this.imageId = imageId;
+
     }
 
     public String getId() {

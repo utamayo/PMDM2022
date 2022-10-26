@@ -1,7 +1,9 @@
 package org.iesch.a09_pokeapp.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -45,6 +47,15 @@ public class PokemonListFragment extends Fragment {
 
     public PokemonListFragment() {
         // Required empty public constructor
+    }
+
+    // SOLUCIONAMOS EL ERROR DEL CRASHEO //
+
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        interfaz = (iComunicaFragments) context;
     }
 
     /**
