@@ -6,10 +6,13 @@ import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import org.iesch.a09_pokeapp.R;
 
@@ -63,9 +66,14 @@ public class DetailFragment extends Fragment {
         }
     }
 
-    // 9 - Establecemos la imagen que queremos en detalleFragment
-    public void setPokemonImage(int pokemonImageId ){
-        detailImageView.setImageDrawable(ContextCompat.getDrawable(getActivity(),pokemonImageId));
+
+    public void setPokemonImage(String pokemonImageUrl ){
+        //detailImageView.setImageDrawable(ContextCompat.getDrawable(getActivity(),pokemonImageId));
+        // Llamar a la libreria de Picasso
+        Log.i("POKEMON","LA URL del Pokemon es: " + pokemonImageUrl);
+        // Mostramos la imagen usando PICASSO
+        Picasso.get().load(pokemonImageUrl).into(detailImageView);
+        // Glide.with(this).load(pokemonUrl).into(detailImageView);
     }
     public void playPokemonSound( int pokemonSoundId ){
         MediaPlayer mediaPlayer = MediaPlayer.create(getActivity(),pokemonSoundId);

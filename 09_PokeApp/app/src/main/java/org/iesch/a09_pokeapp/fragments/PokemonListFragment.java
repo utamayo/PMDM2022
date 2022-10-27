@@ -89,22 +89,22 @@ public class PokemonListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // 1 - Creamos una lista, que es la que vamos a retornar
+
         view = inflater.inflate(R.layout.fragment_pokemon_list, container, false);
-        // 2 - A partir de esta vista vamos a obtener todos los views del fragmento
+
         lvPokemon = view.findViewById(R.id.listaPokemon);
-        // 3 - Traemos el resto de codigo del MainActivity
-        pokemonList.add(new Pokemon("1", "Bulbasaur",Pokemon.Type.PLANT, R.raw.bulbasaur, R.drawable.bulbasaur));
-        pokemonList.add(new Pokemon("2", "Ivysaur",Pokemon.Type.PLANT, R.raw.ivysaur, R.drawable.ivysaur));
-        pokemonList.add(new Pokemon("3", "VenuaSaur",Pokemon.Type.PLANT, R.raw.venuasaur, R.drawable.venusaur));
-        pokemonList.add(new Pokemon("4", "Charmander",Pokemon.Type.FIRE, R.raw.charmander, R.drawable.charmander));
-        pokemonList.add(new Pokemon("5", "Charmeleon",Pokemon.Type.WATER, R.raw.charmeleon, R.drawable.charmeleon));
-        pokemonList.add(new Pokemon("6", "Charizard",Pokemon.Type.FIRE, R.raw.charizard, R.drawable.charizard));
-        pokemonList.add(new Pokemon("7", "Squirtle",Pokemon.Type.WATER, R.raw.squirtle, R.drawable.squirtle));
-        pokemonList.add(new Pokemon("8", "Blastoise",Pokemon.Type.ELECTRIC, R.raw.blastoise, R.drawable.blastoise));
-        pokemonList.add(new Pokemon("25", "Pikachu",Pokemon.Type.ELECTRIC, R.raw.pikachu, R.drawable.pikachu));
-        pokemonList.add(new Pokemon("26", "Raichu",Pokemon.Type.ELECTRIC, R.raw.raichu, R.drawable.raichu));
-        // 4 - Cuando nos pida un Context desde un fragmento lo haremos usando getActivity
+        // 2 - Cambio los URLs y BORRO los Drawables
+        pokemonList.add(new Pokemon("1", "Bulbasaur",Pokemon.Type.PLANT, R.raw.bulbasaur, "https://cdn.alfabetajuega.com/wp-content/uploads/2020/03/bulbasaur-pok%C3%A9mon.png"));
+        pokemonList.add(new Pokemon("2", "Ivysaur",Pokemon.Type.PLANT, R.raw.ivysaur, "https://cdn.alfabetajuega.com/wp-content/uploads/2020/03/bulbasaur-pok%C3%A9mon.png"));
+        pokemonList.add(new Pokemon("3", "VenuaSaur",Pokemon.Type.PLANT, R.raw.venuasaur, "https://cdn.alfabetajuega.com/wp-content/uploads/2020/03/bulbasaur-pok%C3%A9mon.png"));
+        pokemonList.add(new Pokemon("4", "Charmander",Pokemon.Type.FIRE, R.raw.charmander, "https://cdn2.bulbagarden.net/upload/thumb/9/96/Ash_Charmeleon_M20.png/250px-Ash_Charmeleon_M20.png"));
+        pokemonList.add(new Pokemon("5", "Charmeleon",Pokemon.Type.WATER, R.raw.charmeleon, "https://cdn2.bulbagarden.net/upload/thumb/9/96/Ash_Charmeleon_M20.png/250px-Ash_Charmeleon_M20.png"));
+        pokemonList.add(new Pokemon("6", "Charizard",Pokemon.Type.FIRE, R.raw.charizard, "https://pm1.narvii.com/6210/b5e60c3ebf647e90a773813c09cab8aab6825cbf_hq.jpg"));
+        pokemonList.add(new Pokemon("7", "Squirtle",Pokemon.Type.WATER, R.raw.squirtle, "https://pbs.twimg.com/media/EYzE5w0WsAAR69L.jpg"));
+        pokemonList.add(new Pokemon("8", "Blastoise",Pokemon.Type.ELECTRIC, R.raw.blastoise, "https://esports.eldesmarque.com/wp-content/uploads/2021/09/Blass.jpg"));
+        pokemonList.add(new Pokemon("25", "Pikachu",Pokemon.Type.ELECTRIC, R.raw.pikachu, "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2018/08/pikachu_4.jpg"));
+        pokemonList.add(new Pokemon("26", "Raichu",Pokemon.Type.ELECTRIC, R.raw.raichu, "https://www.egames.news/__export/1627425509127/sites/debate/img/2021/07/27/copia_de_egames_-_2021-07-27t163726_028.jpg_976912859.jpg"));
+
         adaptador = new PokemonListAdapter(getActivity(), pokemonList, R.id.pokemon_list_fragment);
         lvPokemon.setAdapter(adaptador);
 
@@ -113,7 +113,7 @@ public class PokemonListFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Pokemon selectedPokemon = (Pokemon) adaptador.getItem(position);
                 if (selectedPokemon != null){
-                    //Toast.makeText(getActivity(), selectedPokemon.getName(), Toast.LENGTH_SHORT).show();
+
                     interfaz.enviarPokemon(selectedPokemon);
                 }
             }
