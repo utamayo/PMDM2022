@@ -20,19 +20,25 @@ public class MainActivity extends AppCompatActivity implements iComunicaFragment
     DetailFragment detalleFragmentPokemon;
     private TextView imageTextView;
     private TextView statsTextView;
+    // 2
+    private Pokemon selectedPokemon;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("Lista Pokemon");
-        // 1 - Declaramoslos botones
+
         imageTextView = findViewById(R.id.activity_main_image_opcion_tv);
         statsTextView = findViewById(R.id.activity_main_opcion_estadisticas_tv);
 
         imageTextView.setBackgroundColor(ContextCompat.getColor(this, com.google.android.material.R.color.design_dark_default_color_primary));
         statsTextView.setBackgroundColor(ContextCompat.getColor(this, com.google.android.material.R.color.design_dark_default_color_secondary));
 
-        // 2 Controlamos los botones
+
         imageTextView.setOnClickListener(this);
         statsTextView.setOnClickListener(this);
     }
@@ -41,11 +47,11 @@ public class MainActivity extends AppCompatActivity implements iComunicaFragment
     public void enviarPokemon(Pokemon pokemon) {
         // esto sirve para comunicar los fragments
         // Toast.makeText(this, pokemon.getName(), Toast.LENGTH_SHORT).show();
-
+        selectedPokemon =pokemon;
         // Aqui realizaremos tod ala logica necesaria para comunicar los Fragments
-        detalleFragmentPokemon = (DetailFragment) getSupportFragmentManager().findFragmentById(R.id.pokemon_detail_fragment);
-        detalleFragmentPokemon.setPokemonImage(pokemon.getImageUrl());
-        detalleFragmentPokemon.playPokemonSound(pokemon.getSoundId());
+        //detalleFragmentPokemon = (DetailFragment) getSupportFragmentManager().findFragmentById(R.id.pokemon_detail_fragment);
+        //detalleFragmentPokemon.setPokemonImage(pokemon.getImageUrl());
+        //detalleFragmentPokemon.playPokemonSound(pokemon.getSoundId());
     }
     // 3
     @Override

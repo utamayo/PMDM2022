@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-
-    <fragment
-        android:id="@+id/pokemon_detail_fragment"
+    <!--1 Cambiamos a FrameLayout-->
+    <FrameLayout
+        android:id="@+id/pokemon_detail_container"
         android:name="org.iesch.a09_pokeapp.fragments.DetailFragment"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        tools:layout="@layout/fragment_detail" />
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,7 +54,7 @@
         android:name="org.iesch.a09_pokeapp.fragments.PokemonListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/pokemon_detail_fragment"
+        android:layout_below="@id/pokemon_detail_container"
         />
 
 </LinearLayout>

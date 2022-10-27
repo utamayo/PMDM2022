@@ -9,19 +9,20 @@ public class Pokemon {
     // le pongo un entero porque contiene el id de la imagen
     private String imageUrl;
     private int soundId;
+    private Stats stats;
 
 
     public enum Type {
         FIRE, WATER, PLANT, ELECTRIC
     }
 
-    public Pokemon(String id, String name, Type type, int soundId, String imageUrl) {
+    public Pokemon(String id, String name, Type type, int soundId, String imageUrl, Stats stats) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.soundId = soundId;
         this.imageUrl = imageUrl;
-
+        this.stats = stats;
     }
 
     public String getId() {
@@ -37,6 +38,10 @@ public class Pokemon {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public Stats getStats() {
+        return stats;
     }
 
     public int getSoundId() {
