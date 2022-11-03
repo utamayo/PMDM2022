@@ -11,7 +11,7 @@
         android:id="@+id/pokemon_detail_container"
         android:name="org.iesch.a09_pokeapp.fragments.DetailFragment"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="240dp"
         />
 
     <LinearLayout
