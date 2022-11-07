@@ -74,16 +74,16 @@ public class RestauranteFragment extends Fragment {
             // 4 - Nos creamos una lista de Restaurantes
             restauranteList = new ArrayList<>();
             // 6 - Llenamos de restaurantes el tema
-            restauranteList.add(new Restaurante("Pizzería Don Topo", "", 4.0f,"Teruel. Spain"));
-            restauranteList.add(new Restaurante("Sam Doner Kebab", "", 3.0f,"Teruel. Spain"));
-            restauranteList.add(new Restaurante("Bar de Cella Kiosko", "", 1.0f,"Cella - Teruel. Spain"));
-            restauranteList.add(new Restaurante("Bar IES Chomon", "", 5.0f,"Teruel. Spain"));
-            restauranteList.add(new Restaurante("Bar la Mina", "", 4.0f,"Teruel. Spain"));
+            restauranteList.add(new Restaurante("Pizzería Don Topo", "https://s03.s3c.es/imag/_v0/770x420/a/a/6/pizza-dia-mundial-mejores-ocu-istock.jpg", 4.0f,"Teruel. Spain"));
+            restauranteList.add(new Restaurante("Sam Doner Kebab", "https://comidasegipcias.com/wp-content/uploads/2019/10/doner-kebab-receta.jpg", 3.0f,"Teruel. Spain"));
+            restauranteList.add(new Restaurante("Bar de Cella Kiosko", "https://i.blogs.es/460883/650_1000_3469397237_26d975ab27_z/450_1000.jpg", 1.0f,"Cella - Teruel. Spain"));
+            restauranteList.add(new Restaurante("Bar IES Chomon", "https://www.lavanguardia.com/files/article_main_microformat/uploads/2020/02/04/5e998254e558a.jpeg", 5.0f,"Teruel. Spain"));
+            restauranteList.add(new Restaurante("Bar la Mina", "https://static1.elcomercio.es/www/multimedia/202202/12/media/cortadas/mejor-hamburguesa-asturias-k8VH-U160918182787dOC-1248x770@El%20Comercio.jpg", 4.0f,"Teruel. Spain"));
             // se lo asignamos al adapter
 
 
             // 3 - Asociar el adaptador al RecyclerView
-            adaptadorRestaurantes = new MyRestauranteRecyclerViewAdapter(restauranteList);
+            adaptadorRestaurantes = new MyRestauranteRecyclerViewAdapter(getActivity(), restauranteList);
             recyclerView.setAdapter(adaptadorRestaurantes);
             // y eliminamos el paquete generado de dummyContent
         }
