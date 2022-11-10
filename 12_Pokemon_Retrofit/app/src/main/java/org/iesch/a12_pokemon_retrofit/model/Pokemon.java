@@ -1,7 +1,9 @@
 package org.iesch.a12_pokemon_retrofit.model;
 
 public class Pokemon {
-    // 6
+
+    // 18 - Añadimos el atributo number a la clase pokemon
+    private int number;
     private String name;
     private String url;
 
@@ -19,5 +21,14 @@ public class Pokemon {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public int getNumber() {
+        String[] urlPartes = url.split("/");
+        return Integer.parseInt(urlPartes[urlPartes.length-1]);
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 }

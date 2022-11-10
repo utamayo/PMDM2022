@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         // 11 Hacemos las configuraciones iniciales en el RecyclerView
         recyclerView = findViewById(R.id.recyclerView);
-        listaPokemonAdapter = new ListaPokemonAdapter();
+        listaPokemonAdapter = new ListaPokemonAdapter(this);
         recyclerView.setAdapter(listaPokemonAdapter);
         //12 Nuestro GRID queremos que tenga 3 columnas
         recyclerView.setHasFixedSize(true);

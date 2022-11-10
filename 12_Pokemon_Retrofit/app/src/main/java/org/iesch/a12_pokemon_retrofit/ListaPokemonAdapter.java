@@ -1,5 +1,6 @@
 package org.iesch.a12_pokemon_retrofit;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import org.iesch.a12_pokemon_retrofit.model.Pokemon;
 
 import java.util.ArrayList;
@@ -17,10 +21,13 @@ import java.util.ArrayList;
 public class ListaPokemonAdapter extends RecyclerView.Adapter<ListaPokemonAdapter.ViewHolder> {
     //5
     private ArrayList<Pokemon> dataset;
+    private Context context;
     //9
-    public ListaPokemonAdapter(){
+    public ListaPokemonAdapter(Context context){
+        this.context = context;
         dataset = new ArrayList<>();
     }
+
 
 
     @NonNull
@@ -37,6 +44,13 @@ public class ListaPokemonAdapter extends RecyclerView.Adapter<ListaPokemonAdapte
         // 7
         Pokemon p = dataset.get(position);
         holder.nombreTextView.setText(p.getName());
+        // 19 cargamos la imagen con Glide
+        Glide.with(context)
+                .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + p.getNumber() + ".png")
+                .centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.fotoImageView);
+
     }
 
     @Override

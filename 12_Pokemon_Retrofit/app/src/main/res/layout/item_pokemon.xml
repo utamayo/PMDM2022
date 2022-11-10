@@ -9,7 +9,7 @@
         android:layout_width="96dp"
         android:layout_height="96dp"
         android:layout_gravity="center_horizontal"
-        android:background="@color/teal_200"
+
         />
 
     <TextView
