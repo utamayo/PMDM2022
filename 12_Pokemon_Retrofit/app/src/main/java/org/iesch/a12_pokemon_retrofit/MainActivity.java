@@ -1,5 +1,6 @@
 package org.iesch.a12_pokemon_retrofit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,36 +24,63 @@ public class MainActivity extends AppCompatActivity {
 
 
     private Retrofit retrofit;
-    //10
+
     private RecyclerView recyclerView;
     private ListaPokemonAdapter listaPokemonAdapter;
+    // C 1
+    private int offset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // 11 Hacemos las configuraciones iniciales en el RecyclerView
+
         recyclerView = findViewById(R.id.recyclerView);
         listaPokemonAdapter = new ListaPokemonAdapter(this);
         recyclerView.setAdapter(listaPokemonAdapter);
-        //12 Nuestro GRID queremos que tenga 3 columnas
+
         recyclerView.setHasFixedSize(true);
         GridLayoutManager layoutManager = new GridLayoutManager(this,3);
-        //13 Lo asignamos al recyclerview
+
         recyclerView.setLayoutManager(layoutManager);
+
+        // D - Nuestro RecyclerView detecta el movimiento con este Scroll
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                // D 2 - Hacemos una serie de preguntas para preguntar si el scroll es hacia abajo y llegó al ulyimo item
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int pastVisibleItems = layoutManager.findFirstVisibleItemPosition();
+                if (aptoParaCargar){
+                    if ((visibleItemCount + pastVisibleItems) >= totalItemCount){
+                        Log.i("POKEMON","Llegamos al Final");
+                        aptoParaCargar = false;
+                        offset += 20;
+                        obtenerDatos(offset);
+                    }
+                }
+
+            }
+        });
 
         retrofit = new Retrofit.Builder()
                 .baseUrl("https://pokeapi.co/api/v2/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        obtenerDatos();
+        // C 2
+        offset=0;
+        obtenerDatos(offset);
     }
 
-    private void obtenerDatos() {
+    private void obtenerDatos(int offset) {
 
         PokeapiService service = retrofit.create(PokeapiService.class);
 
-        Call<PokemonRespuesta> pokemonRespuestaCall = service.obtenerListaPokemon();
+        // B - Colocamos los parametros, limit sera 20, pero offset tiene que cambiar
+        Call<PokemonRespuesta> pokemonRespuestaCall = service.obtenerListaPokemon(20, 20);
 
         pokemonRespuestaCall.enqueue(new Callback<PokemonRespuesta>() {
 

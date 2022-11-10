@@ -4,11 +4,10 @@ import org.iesch.a12_pokemon_retrofit.model.PokemonRespuesta;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface PokeapiService {
-    // 4 - En esta ocasion solo vamos a acceder al listado de los pokemon
-    // El tipo de retorno SIEMPRE ca a ser un objeto de tipo Call
-    // Tenemos que especificar que accion usará y con qué URL
+   // A - Modificamos el método para que sea parametrizable
     @GET("pokemon")
-    Call<PokemonRespuesta> obtenerListaPokemon();
+    Call<PokemonRespuesta> obtenerListaPokemon(@Query("limit") int limit, @Query("offset") int offset);
 }
