@@ -57,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
         // Sin commit no guarda nada en SharedPreferences
         Obj_editor.commit();
 
+        Intent i = new Intent(MainActivity.this, HomeActivity.class);
+        startActivity(i);
+
     }
 }
 
