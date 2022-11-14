@@ -30,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     // C 1
     private int offset;
 
+    // E 2
+    private boolean aptoParaCargar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,10 +53,11 @@ public class MainActivity extends AppCompatActivity {
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                // D 2 - Hacemos una serie de preguntas para preguntar si el scroll es hacia abajo y llegó al ulyimo item
+                // D 2 - Hacemos una serie de preguntas para preguntar si el scroll es hacia abajo y llegó al ultimo item
                 int visibleItemCount = layoutManager.getChildCount();
                 int totalItemCount = layoutManager.getItemCount();
                 int pastVisibleItems = layoutManager.findFirstVisibleItemPosition();
+                //E 1 me creo aptoparaCargar para controlar las llamadas a la API
                 if (aptoParaCargar){
                     if ((visibleItemCount + pastVisibleItems) >= totalItemCount){
                         Log.i("POKEMON","Llegamos al Final");
@@ -70,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
                 .baseUrl("https://pokeapi.co/api/v2/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+        // E 3
+        aptoParaCargar=true;
         // C 2
         offset=0;
         obtenerDatos(offset);
@@ -80,13 +86,14 @@ public class MainActivity extends AppCompatActivity {
         PokeapiService service = retrofit.create(PokeapiService.class);
 
         // B - Colocamos los parametros, limit sera 20, pero offset tiene que cambiar
-        Call<PokemonRespuesta> pokemonRespuestaCall = service.obtenerListaPokemon(20, 20);
+        Call<PokemonRespuesta> pokemonRespuestaCall = service.obtenerListaPokemon(20, offset);
 
         pokemonRespuestaCall.enqueue(new Callback<PokemonRespuesta>() {
 
             @Override
             public void onResponse(Call<PokemonRespuesta> call, Response<PokemonRespuesta> response) {
-
+                // E 4
+                aptoParaCargar = true;
                 if (response.isSuccessful()){
                     PokemonRespuesta pokemonRespuesta = response.body();
 
@@ -103,6 +110,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<PokemonRespuesta> call, Throwable t) {
+                // E 4
+                aptoParaCargar = true;
                 Log.i("POKEMON", "onFailure: "+t.getMessage());
             }
         });
