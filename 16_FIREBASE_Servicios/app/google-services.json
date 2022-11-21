@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "4412258209",
+    "project_id": "fir-dam22alberto",
+    "storage_bucket": "fir-dam22alberto.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:4412258209:android:904ed924d64212218bbde0",
+        "android_client_info": {
+          "package_name": "org.iesch.mi_proyecto_firebase_dam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "4412258209-bq2nobs7vu79881v5qkhkt7jal01dtm7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBoE1u-4KkPDIJ8sLIkeFHRrBkJOgRxro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "4412258209-bq2nobs7vu79881v5qkhkt7jal01dtm7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
