@@ -1,6 +1,7 @@
 package org.iesch.mi_proyecto_firebase_dam;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -14,25 +15,35 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 enum ProviderType {
-    BASIC
+    BASIC,
+    GOOGLE
 }
 public class LoginActivity extends AppCompatActivity {
 
     EditText etEmail, etPassword;
-    Button btnRegistrar, btnLogin;
+    Button btnRegistrar, btnLogin, btnLoginGoogle;
     LinearLayout authLayout;
 
     private FirebaseAnalytics mFirebaseAnalytics;
     // 1
     private FirebaseAuth mAuth;
+
+    private GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onStart() {
@@ -51,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.passwordEditText);
         btnRegistrar = findViewById(R.id.registerButton);
         btnLogin = findViewById(R.id.loginButton);
+        btnLoginGoogle = findViewById(R.id.loginGoogleButton);
         // 2
         iniciarAnalytics();
         // Initialize Firebase Auth
@@ -77,7 +89,58 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(v -> {
             loguearConEmailyPassword();
         });
+        btnLoginGoogle.setOnClickListener(v -> {
+            loguearConGoogle();
+        });
     }
+
+    private void loguearConGoogle() {
+        // Al hacer click en el boton de login con Google:
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        // Nos creamos el GoogleSignIn Client
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent,100);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 100){
+            // Esto signifoca que venimos de loguearnos con Google
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                // La autenticacion con Google ha sido exitosa
+                Log.w("FIREBASE", "firebasAuthConGoogle: "+ account.getId());
+                firebaseAuthWithGoogle(account.getIdToken());
+            } catch (ApiException e){
+                // La autenticacion con Google ha fallado
+                Log.w("FIREBASE","Google SignIn ha fallado",e);
+            }
+        }
+    }
+
+    private void firebaseAuthWithGoogle(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken,null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()){
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            // Voy a HomeActivity
+                            irAHomeActivity(user.getEmail(),ProviderType.GOOGLE);
+                        } else {
+                            Log.w("FIREBASE", "Logueo con Google: Fallo");
+                        }
+                    }
+                });
+    }
+
 
     private void loguearConEmailyPassword() {
         String _email = etEmail.getText().toString();

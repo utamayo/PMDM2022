@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
-            android:drawableStart="@drawable/google"
+            android:drawableLeft="@drawable/google"
             android:paddingStart="16dp"
             android:text="Login con Google"
             android:textColor="@color/black"/>
