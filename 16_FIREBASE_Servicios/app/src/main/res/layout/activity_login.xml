@@ -65,6 +65,15 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="8dp"/>
+        <Button
+            android:id="@+id/loginGoogleButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:drawableStart="@drawable/google"
+            android:paddingStart="16dp"
+            android:text="Login con Google"
+            android:textColor="@color/black"/>
 
     </LinearLayout>
 
