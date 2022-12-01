@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "4412258209-0u40ncdotcfis0ph3q4rqnt7ivb8k4nf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.iesch.mi_proyecto_firebase_dam",
+            "certificate_hash": "3614a81217e52e1aad580c19734b8be432ec209c"
+          }
+        },
+        {
+          "client_id": "4412258209-aqbkaln6f4lvkgct6n6jqfbscocuj4ev.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.iesch.mi_proyecto_firebase_dam",
+            "certificate_hash": "51e8f4bb9af9d00861887b88edded6e04b32c5bd"
+          }
+        },
+        {
           "client_id": "4412258209-bq2nobs7vu79881v5qkhkt7jal01dtm7.apps.googleusercontent.com",
           "client_type": 3
         }

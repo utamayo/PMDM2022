@@ -97,6 +97,7 @@ public class LoginActivity extends AppCompatActivity {
     private void loguearConGoogle() {
         // Al hacer click en el boton de login con Google:
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
         // Nos creamos el GoogleSignIn Client
