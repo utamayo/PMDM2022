@@ -28,6 +28,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 enum ProviderType {
     BASIC,
@@ -69,7 +70,45 @@ public class LoginActivity extends AppCompatActivity {
         iniciarAuthentication();
         //Comprobamos si tenemosla sesion abierta
         comprobarSiEstaLogueado();
+        // Push Notifications
+        notificaciones();
+        suscripcionaCoches();
 
+    }
+
+    private void suscripcionaCoches() {
+        FirebaseMessaging.getInstance().subscribeToTopic("coches")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = "Subscribed";
+                        if (!task.isSuccessful()) {
+                            msg = "Subscribe failed";
+                        }
+                        Log.d("PUSH", msg);
+                        Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
+
+    private void notificaciones() {
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()){
+                            Log.w("PUSH", "El registro FCM del token ha fallado");
+                            return;
+                        }
+
+                        // Obtenemos el nuevo FCM registration token
+                        String token = task.getResult();
+                        Log.i("PUSH","El token de mi movil es: "+token);
+
+                    }
+                });
     }
 
     private void comprobarSiEstaLogueado() {
