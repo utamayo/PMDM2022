@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class ContadorScreen extends StatefulWidget {
+  const ContadorScreen({super.key});
 
+  @override
+  State<ContadorScreen> createState() => _ContadorScreenState();
+}
+
+class _ContadorScreenState extends State<ContadorScreen> {
   // variables o propiedades
-
+  int contador = 9;
   @override
   Widget build(BuildContext context) {
     const fontsize30 = TextStyle(fontSize: 30);
-    int contador = 9;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Screen'),
+        title: const Text('Contador Screen'),
         centerTitle: true,
         elevation: 0,
       ),
@@ -30,7 +34,7 @@ class HomeScreen extends StatelessWidget {
         child: const Icon(Icons.add),
         onPressed: () {
           contador++;
-          print('Contador: $contador');
+          setState(() {});
         },
       ),
       //floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
