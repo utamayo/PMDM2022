@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_04_componentes/pages/pages.dart';
+import 'package:flutter_04_componentes/theme/app_theme.dart';
 
 void main() => runApp(const MyApp());
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         'alert': (context) => Alert_Page(),
         'card': (context) => Card_Page()
       },
+      theme: AppTheme.halloween,
     );
   }
 }

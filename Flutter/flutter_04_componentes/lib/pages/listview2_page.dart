@@ -30,9 +30,9 @@ class ListView2_Page extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.indigo,
+          //backgroundColor: Colors.indigo,
           title: const Text('Tipo Lista 2 Page'),
-          elevation: 0,
+          //elevation: 0,
         ),
         body: ListView.separated(
           itemCount: opciones.length,

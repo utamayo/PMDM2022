@@ -7,25 +7,40 @@ class Home_Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.indigo,
-        title: const Text('Home Page'),
-        elevation: 0,
-      ),
-      body: ListView.separated(
-          itemBuilder: ((context, i) => ListTile(
-                title: Text('Hola DAM'),
-                onTap: () {
-                  // Aqui vamos a navegar a otra pagina
-                  //final ruta =
-                  //    MaterialPageRoute(builder: (context) => ListView1_Page());
-                  //Navigator.pushAndRemoveUntil(context, ruta);
-
-                  Navigator.pushNamed(context, 'lista1');
-                },
-              )),
-          separatorBuilder: (_, __) => const Divider(),
-          itemCount: 10),
-    );
+        appBar: AppBar(
+          title: const Text('Flutter Componentes'),
+        ),
+        body: ListView(
+          children: [
+            ListTile(
+              title: const Text('Listas de tipo 1'),
+              leading: const Icon(Icons.account_balance_wallet),
+              trailing: const Icon(Icons.keyboard_arrow_right),
+              onTap: () => Navigator.pushNamed(context, 'lista1'),
+            ),
+            const Divider(),
+            ListTile(
+              title: const Text('Listas de tipo 2'),
+              leading: const Icon(Icons.account_balance_wallet),
+              trailing: const Icon(Icons.keyboard_arrow_right),
+              onTap: () => Navigator.pushNamed(context, 'lista2'),
+            ),
+            const Divider(),
+            ListTile(
+              title: const Text('Alerts - Alertas'),
+              leading: const Icon(Icons.account_balance_wallet),
+              trailing: const Icon(Icons.keyboard_arrow_right),
+              onTap: () => Navigator.pushNamed(context, 'alert'),
+            ),
+            const Divider(),
+            ListTile(
+              title: const Text('Cards - Tarjetas'),
+              leading: const Icon(Icons.account_balance_wallet),
+              trailing: const Icon(Icons.keyboard_arrow_right),
+              onTap: () => Navigator.pushNamed(context, 'card'),
+            ),
+            const Divider(),
+          ],
+        ));
   }
 }
