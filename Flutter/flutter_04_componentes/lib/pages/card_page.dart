@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/tarjeta_personalizada_1.dart';
+import '../widgets/tarjeta_personalizada_2.dart';
 
 class Card_Page extends StatelessWidget {
   Card_Page({super.key});
@@ -16,11 +17,22 @@ class Card_Page extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           children: const [
             TarjetaPersonalizada1(),
-            TarjetaPersonalizada1(),
-            TarjetaPersonalizada1(),
-            TarjetaPersonalizada1(),
-            TarjetaPersonalizada1(),
-            TarjetaPersonalizada1(),
+            SizedBox(
+              height: 10,
+            ),
+            TarjetaPersonalizada2(),
+            SizedBox(
+              height: 10,
+            ),
+            TarjetaPersonalizada2(),
+            SizedBox(
+              height: 10,
+            ),
+            TarjetaPersonalizada2(),
+            SizedBox(
+              height: 10,
+            ),
+            TarjetaPersonalizada2(),
           ],
         ));
   }
