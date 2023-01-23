@@ -11,7 +11,7 @@ class AppTheme {
     ),
 
     // Estilo de los iconos
-    iconTheme: const IconThemeData(opacity: 0.1, color: primario),
+    iconTheme: const IconThemeData(color: Colors.indigo),
   );
 
   // Tema Propio: HALLOWEEN
@@ -21,5 +21,13 @@ class AppTheme {
       iconTheme: const IconThemeData(color: Colors.orange),
       // Estilo de los botones
       textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(primary: Colors.orange)));
+          style: TextButton.styleFrom(primary: Colors.orange)),
+      //Estilo de los ElevatedButtons
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.orange,
+          shape: const StadiumBorder(),
+          elevation: 0,
+        ),
+      ));
 }

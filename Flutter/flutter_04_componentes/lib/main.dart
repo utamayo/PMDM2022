@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         'alert': (context) => Alert_Page(),
         'card': (context) => Card_Page()
       },
-      theme: AppTheme.halloween,
+      theme: AppTheme.lightTheme,
     );
   }
 }

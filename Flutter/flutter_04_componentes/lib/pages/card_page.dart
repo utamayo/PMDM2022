@@ -20,19 +20,33 @@ class Card_Page extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            TarjetaPersonalizada2(),
+            TarjetaPersonalizada2(
+              imageUrl:
+                  'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+              comentario: 'Esto es un bonito paisaje',
+            ),
             SizedBox(
               height: 10,
             ),
-            TarjetaPersonalizada2(),
+            TarjetaPersonalizada2(
+              imageUrl:
+                  'https://images.pexels.com/photos/1287145/pexels-photo-1287145.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+              comentario: 'Esto es un bonito paisaje',
+            ),
             SizedBox(
               height: 10,
             ),
-            TarjetaPersonalizada2(),
+            TarjetaPersonalizada2(
+              imageUrl:
+                  'https://images.pexels.com/photos/5366526/pexels-photo-5366526.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+            ),
             SizedBox(
               height: 10,
             ),
-            TarjetaPersonalizada2(),
+            TarjetaPersonalizada2(
+              imageUrl:
+                  'https://images.pexels.com/photos/2325446/pexels-photo-2325446.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+            ),
           ],
         ));
   }
