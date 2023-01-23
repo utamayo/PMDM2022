@@ -40,6 +40,13 @@ class Home_Page extends StatelessWidget {
               onTap: () => Navigator.pushNamed(context, 'card'),
             ),
             const Divider(),
+            ListTile(
+              title: const Text('Avatar'),
+              leading: const Icon(Icons.image_rounded),
+              trailing: const Icon(Icons.keyboard_arrow_right),
+              onTap: () => Navigator.pushNamed(context, 'avatar'),
+            ),
+            const Divider(),
           ],
         ));
   }
