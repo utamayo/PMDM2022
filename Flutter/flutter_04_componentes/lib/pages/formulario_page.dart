@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_04_componentes/widgets/custom_input_widget.dart';
 
 class FormularioPage extends StatelessWidget {
   const FormularioPage({super.key});
@@ -11,27 +12,41 @@ class FormularioPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
-            children: [
-              TextFormField(
-                autofocus: false,
-                initialValue: '',
-                textCapitalization: TextCapitalization.words,
-                decoration: const InputDecoration(
-                  labelText: 'Nombre',
-                  hintText: 'Nombre completo',
-                  //helperText: 'Mínimo tres caracteres',
-                  suffixIcon: Icon(Icons.person),
-                  // prefixIcon: Icon(Icons.verified_user_outlined),
-                  icon: Icon(Icons.verified_user_outlined),
-                ),
-                onChanged: (valor) {
-                  print(valor);
-                },
-                validator: (value) {
-                  if (value == null) return 'Este campo es requerido';
-                  return value.length < 3 ? 'Minimo 3 caracteres' : null;
-                },
-                autovalidateMode: AutovalidateMode.onUserInteraction,
+            children: const [
+              CustomInputWidget(
+                labelText: 'Nombre',
+                hintText: 'Nombre del usuario',
+                icon: Icons.verified_user_outlined,
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              CustomInputWidget(
+                labelText: 'Apellido',
+                hintText: 'Apellido del usuario',
+                icon: Icons.verified_user_outlined,
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              CustomInputWidget(
+                labelText: 'Correo',
+                hintText: 'Correo del usuario',
+                icon: Icons.email_outlined,
+                suffixIcon: Icons.email_outlined,
+                teclado: TextInputType.emailAddress,
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              CustomInputWidget(
+                labelText: 'Contraseña',
+                hintText: 'Password del usuario',
+                icon: Icons.password_outlined,
+                obscureText: true,
+              ),
+              SizedBox(
+                height: 30,
               ),
             ],
           ),
