@@ -8,6 +8,14 @@ class AvatarPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Avatar Page'),
+        actions: [
+          Container(
+            margin: const EdgeInsets.only(right: 10),
+            child: const CircleAvatar(
+              child: Text('AR'),
+            ),
+          )
+        ],
       ),
     );
   }
