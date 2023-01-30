@@ -47,6 +47,13 @@ class Home_Page extends StatelessWidget {
               onTap: () => Navigator.pushNamed(context, 'avatar'),
             ),
             const Divider(),
+            ListTile(
+              title: const Text('Formulario'),
+              leading: const Icon(Icons.image_rounded),
+              trailing: const Icon(Icons.keyboard_arrow_right),
+              onTap: () => Navigator.pushNamed(context, 'formulario'),
+            ),
+            const Divider(),
           ],
         ));
   }

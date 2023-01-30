@@ -12,6 +12,27 @@ class AppTheme {
 
     // Estilo de los iconos
     iconTheme: const IconThemeData(color: Colors.indigo),
+    //Estilo de los Formularios
+    inputDecorationTheme: const InputDecorationTheme(
+      floatingLabelStyle: TextStyle(color: primario),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: primario),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+        ),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: primario),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+        ),
+      ),
+      border: OutlineInputBorder(
+        borderSide: BorderSide(color: primario),
+      ),
+    ),
   );
 
   // Tema Propio: HALLOWEEN

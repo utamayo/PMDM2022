@@ -19,7 +19,8 @@ class MyApp extends StatelessWidget {
         'lista2': (context) => ListView2_Page(),
         'alert': (context) => Alert_Page(),
         'card': (context) => Card_Page(),
-        'avatar': (context) => AvatarPage()
+        'avatar': (context) => AvatarPage(),
+        'formulario': (context) => FormularioPage()
       },
       theme: AppTheme.lightTheme,
     );
