@@ -11,11 +11,19 @@ class AvatarPage extends StatelessWidget {
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 10),
-            child: const CircleAvatar(
+            child: CircleAvatar(
               child: Text('AR'),
+              backgroundColor: Colors.indigo[900],
             ),
           )
         ],
+      ),
+      body: const Center(
+        child: CircleAvatar(
+          maxRadius: 110,
+          backgroundImage:
+              NetworkImage('https://i.blogs.es/85aa44/stan-lee/840_560.jpg'),
+        ),
       ),
     );
   }
