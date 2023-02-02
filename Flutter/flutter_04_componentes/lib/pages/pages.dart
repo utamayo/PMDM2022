@@ -1,3 +1,4 @@
+export 'package:flutter_04_componentes/pages/slider_page.dart';
 export 'package:flutter_04_componentes/pages/formulario_page.dart';
 export 'package:flutter_04_componentes/pages/avatar_page.dart';
 export 'package:flutter_04_componentes/pages/card_page.dart';

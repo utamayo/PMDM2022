@@ -10,6 +10,14 @@ class AppTheme {
       elevation: 0,
     ),
 
+    // Estilo de los ElevatedButtons
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.indigo,
+            //foregroundColor: Colors.indigo,
+            shape: const StadiumBorder(),
+            elevation: 0)),
+
     // Estilo de los iconos
     iconTheme: const IconThemeData(color: Colors.indigo),
     //Estilo de los Formularios

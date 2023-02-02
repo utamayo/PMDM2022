@@ -20,7 +20,8 @@ class MyApp extends StatelessWidget {
         'alert': (context) => Alert_Page(),
         'card': (context) => Card_Page(),
         'avatar': (context) => AvatarPage(),
-        'formulario': (context) => FormularioPage()
+        'formulario': (context) => FormularioPage(),
+        'slider': (context) => SliderPage(),
       },
       theme: AppTheme.lightTheme,
     );
