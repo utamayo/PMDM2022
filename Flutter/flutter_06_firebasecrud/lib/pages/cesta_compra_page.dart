@@ -15,6 +15,11 @@ class _CestaCompraPageState extends State<CestaCompraPage> {
   @override
   void initState() {
     super.initState();
+    FirebaseFirestore.instance.collection('cesta_compra').snapshots().listen(
+      (productos) {
+        mapProductos(productos);
+      },
+    );
     fetchProductos();
   }
 
@@ -31,7 +36,7 @@ class _CestaCompraPageState extends State<CestaCompraPage> {
         .map((producto) => Producto(
               id: producto.id,
               descripcion: producto['descripcion'],
-              cantidad: producto['cantidad'],
+              cantidad: producto['cantidad'] ?? '',
             ))
         .toList();
     setState(() {
@@ -45,6 +50,7 @@ class _CestaCompraPageState extends State<CestaCompraPage> {
       appBar: AppBar(
         title: const Text('Cesta Compra'),
         elevation: 0,
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.add))],
       ),
       body: ListView.builder(
           itemCount: listaProductos.length,
