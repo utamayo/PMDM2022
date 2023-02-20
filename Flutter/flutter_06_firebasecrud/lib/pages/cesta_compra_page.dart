@@ -71,8 +71,13 @@ class _CestaCompraPageState extends State<CestaCompraPage> {
                 children: [
                   // A SlidableAction can have an icon and/or a label.
                   SlidableAction(
-                    onPressed: (c) {
+                    onPressed: (context) {
                       eliminarProducto(listaProductos[index].id);
+                      // Muestro un Snackbar diciendo que el producto se ha eliminado
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          backgroundColor: Colors.redAccent,
+                          content: Text(
+                              'Se ha eliminado el producto correctamente')));
                     },
                     backgroundColor: Color(0xFFFE4A49),
                     foregroundColor: Colors.white,
