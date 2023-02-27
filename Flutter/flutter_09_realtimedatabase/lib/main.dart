@@ -17,6 +17,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Material App', home: MenuPage());
+    return MaterialApp(
+      title: 'Material App',
+      home: MenuPage(),
+      theme: ThemeData(primarySwatch: Colors.red),
+    );
   }
 }
