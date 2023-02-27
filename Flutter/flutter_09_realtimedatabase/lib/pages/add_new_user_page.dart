@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import '../model/user.dart';
 
 class AddNewUserPage extends StatefulWidget {
@@ -20,14 +22,42 @@ class _AddNewUserPageState extends State<AddNewUserPage> {
   TextEditingController phoneNumberController = TextEditingController();
   bool isLoading = false;
 
+  // Añadir Usuario a RealTime Database
   sendUserOnFirebase() async {
     setState(() {
       isLoading = true;
     });
 
-    usernameController = TextEditingController();
-    emailController = TextEditingController();
-    phoneNumberController = TextEditingController();
+    final response = await http.post(
+      Uri.parse(
+          'https://fir-flutterdam23-default-rtdb.europe-west1.firebasedatabase.app/usuarios.json'),
+      body: jsonEncode({
+        "username": usernameController.text,
+        "email": emailController.text,
+        "phoneNumber": phoneNumberController.text,
+      }),
+    );
+    print(response.statusCode);
+    print(response.body);
+    if (response.statusCode == 200) {
+      usernameController = TextEditingController();
+      emailController = TextEditingController();
+      phoneNumberController = TextEditingController();
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text(
+          'usuario añadido correctamente',
+        ),
+        backgroundColor: Colors.green,
+      ));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text(
+          'Error al añadir usuario',
+        ),
+        backgroundColor: Colors.red,
+      ));
+    }
+
     setState(() {
       isLoading = false;
     });
@@ -52,7 +82,10 @@ class _AddNewUserPageState extends State<AddNewUserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Añadir Nuevo Usuario')),
+      appBar: AppBar(
+        title: const Text('Añadir Nuevo Usuario'),
+        elevation: 0,
+      ),
       body: Form(
         key: _formKey,
         child: Padding(
@@ -140,7 +173,7 @@ class _AddNewUserPageState extends State<AddNewUserPage> {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           if (widget.user != null) {
-                            print("edit user");
+                            print("Editar Usuario");
                             updateUser();
                           } else {
                             sendUserOnFirebase();

@@ -3,15 +3,15 @@ import 'package:flutter_09_realtimedatabase/pages/add_new_user_page.dart';
 import '../model/user.dart';
 
 class UserTile extends StatelessWidget {
-  final User user;
-  const UserTile({super.key, required this.user});
+  final User? user;
+  const UserTile({super.key, this.user});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        title: Text(user.username),
-        subtitle: Text("${user.email}, \n${user.phoneNumber}"),
+        title: Text(user!.username),
+        subtitle: Text("${user!.email}, \n${user!.phoneNumber}"),
         trailing: SizedBox(
           width: MediaQuery.of(context).size.width * 0.4,
           child: Row(
