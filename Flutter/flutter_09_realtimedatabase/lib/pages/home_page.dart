@@ -18,6 +18,7 @@ class _MenuPageState extends State<MenuPage> {
   List<User?> _list = [];
   //Obtenermos los usuarios de RealTime
   fetchUsers() async {
+    _list = [];
     final response = await http.get(Uri.parse(
         'https://fir-flutterdam23-default-rtdb.europe-west1.firebasedatabase.app/usuarios.json'));
     final extractedData = jsonDecode(response.body) as Map<String, dynamic>;
@@ -28,7 +29,8 @@ class _MenuPageState extends State<MenuPage> {
           phoneNumber: value["phoneNumber"],
           docId: key));
     });
-    //print(_list);
+    print(_list);
+    setState(() {});
   }
 
   @override
@@ -52,11 +54,17 @@ class _MenuPageState extends State<MenuPage> {
         },
         child: const Icon(Icons.add),
       ),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          return UserTile(user: _list[index]);
-        },
-        itemCount: _list.length,
+      body: RefreshIndicator(
+        onRefresh: () => fetchUsers(),
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: ListView.builder(
+            itemBuilder: (context, index) {
+              return UserTile(user: _list[index]);
+            },
+            itemCount: _list.length,
+          ),
+        ),
       ),
     );
   }

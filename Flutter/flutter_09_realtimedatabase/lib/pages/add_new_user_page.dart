@@ -65,6 +65,32 @@ class _AddNewUserPageState extends State<AddNewUserPage> {
 
   updateUser() async {
     // Actualizar usuario
+    final response = await http.patch(
+        Uri.parse(
+            'https://fir-flutterdam23-default-rtdb.europe-west1.firebasedatabase.app/usuarios/${widget.user!.docId}.json'),
+        body: jsonEncode({
+          "username": usernameController.text,
+          "email": emailController.text,
+          "phoneNumber": phoneNumberController.text,
+        }));
+    if (response.statusCode == 200) {
+      usernameController = TextEditingController();
+      emailController = TextEditingController();
+      phoneNumberController = TextEditingController();
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text(
+          'usuario actualizado correctamente',
+        ),
+        backgroundColor: Colors.green,
+      ));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text(
+          'Error al actualizare usuario',
+        ),
+        backgroundColor: Colors.red,
+      ));
+    }
   }
 
   @override
