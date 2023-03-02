@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_09_realtimedatabase/pages/home_page.dart';
+import 'package:flutter_09_realtimedatabase/provider/crud_realtimedb_provider.dart';
+import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
 
@@ -17,10 +19,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Material App',
-      home: MenuPage(),
-      theme: ThemeData(primarySwatch: Colors.red),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => CRUDOperationProvider()),
+      ],
+      child: MaterialApp(
+        title: 'Material App',
+        home: MenuPage(),
+        theme: ThemeData(primarySwatch: Colors.red),
+      ),
     );
   }
 }

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_09_realtimedatabase/pages/add_new_user_page.dart';
+import 'package:provider/provider.dart';
 import '../model/user.dart';
 import 'package:http/http.dart' as http;
+
+import '../provider/crud_realtimedb_provider.dart';
 
 class UserTile extends StatelessWidget {
   final User? user;
@@ -9,6 +12,7 @@ class UserTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<CRUDOperationProvider>(context);
     return Card(
       child: ListTile(
         title: Text(user!.username),
@@ -34,23 +38,7 @@ class UserTile extends StatelessWidget {
               IconButton(
                 onPressed: () async {
                   // Eliminar Usuario
-                  final response = await http.delete(Uri.parse(
-                      'https://fir-flutterdam23-default-rtdb.europe-west1.firebasedatabase.app/usuarios/${user!.docId}.json'));
-                  if (response.statusCode == 200) {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text(
-                        'Usuario eliminado correctamente',
-                      ),
-                      backgroundColor: Colors.green,
-                    ));
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text(
-                        'Error al eliminar usuario',
-                      ),
-                      backgroundColor: Colors.red,
-                    ));
-                  }
+                  provider.deleteUser(context: context, id: user!.docId);
                 },
                 icon: const Icon(
                   Icons.delete,

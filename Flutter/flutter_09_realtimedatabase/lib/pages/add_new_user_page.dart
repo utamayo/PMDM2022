@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_09_realtimedatabase/provider/crud_realtimedb_provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import '../model/user.dart';
 
 class AddNewUserPage extends StatefulWidget {
@@ -13,113 +15,30 @@ class AddNewUserPage extends StatefulWidget {
 }
 
 class _AddNewUserPageState extends State<AddNewUserPage> {
-  final _formKey = GlobalKey<FormState>();
-  final emailRegExp = RegExp(
-    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
-  );
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
-  bool isLoading = false;
-
-  // Añadir Usuario a RealTime Database
-  sendUserOnFirebase() async {
-    setState(() {
-      isLoading = true;
-    });
-
-    final response = await http.post(
-      Uri.parse(
-          'https://fir-flutterdam23-default-rtdb.europe-west1.firebasedatabase.app/usuarios.json'),
-      body: jsonEncode({
-        "username": usernameController.text,
-        "email": emailController.text,
-        "phoneNumber": phoneNumberController.text,
-      }),
-    );
-    print(response.statusCode);
-    print(response.body);
-    if (response.statusCode == 200) {
-      usernameController = TextEditingController();
-      emailController = TextEditingController();
-      phoneNumberController = TextEditingController();
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text(
-          'usuario añadido correctamente',
-        ),
-        backgroundColor: Colors.green,
-      ));
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text(
-          'Error al añadir usuario',
-        ),
-        backgroundColor: Colors.red,
-      ));
-    }
-
-    setState(() {
-      isLoading = false;
-    });
-  }
-
-  updateUser() async {
-    // Actualizar usuario
-    final response = await http.patch(
-        Uri.parse(
-            'https://fir-flutterdam23-default-rtdb.europe-west1.firebasedatabase.app/usuarios/${widget.user!.docId}.json'),
-        body: jsonEncode({
-          "username": usernameController.text,
-          "email": emailController.text,
-          "phoneNumber": phoneNumberController.text,
-        }));
-    if (response.statusCode == 200) {
-      usernameController = TextEditingController();
-      emailController = TextEditingController();
-      phoneNumberController = TextEditingController();
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text(
-          'usuario actualizado correctamente',
-        ),
-        backgroundColor: Colors.green,
-      ));
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text(
-          'Error al actualizare usuario',
-        ),
-        backgroundColor: Colors.red,
-      ));
-    }
-  }
-
-  @override
-  void initState() {
-    //Cargamos la información del usuario si se trata de actualizar
-    if (widget.user != null) {
-      usernameController = TextEditingController(text: widget.user!.username);
-      emailController = TextEditingController(text: widget.user!.email);
-      phoneNumberController =
-          TextEditingController(text: widget.user!.phoneNumber);
-    }
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<CRUDOperationProvider>(context);
+    if (widget.user != null) {
+      provider.usernameController =
+          TextEditingController(text: widget.user!.username);
+      provider.emailController =
+          TextEditingController(text: widget.user!.email);
+      provider.phoneNumberController =
+          TextEditingController(text: widget.user!.phoneNumber);
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text('Añadir Nuevo Usuario'),
         elevation: 0,
       ),
       body: Form(
-        key: _formKey,
+        key: provider.formKey,
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
             children: [
               TextFormField(
-                controller: usernameController,
+                controller: provider.usernameController,
                 cursorColor: Colors.black,
                 keyboardType: TextInputType.text,
                 validator: (value) {
@@ -142,11 +61,11 @@ class _AddNewUserPageState extends State<AddNewUserPage> {
                 height: 15,
               ),
               TextFormField(
-                controller: emailController,
+                controller: provider.emailController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, introduzca email';
-                  } else if (!emailRegExp.hasMatch(value)) {
+                  } else if (!provider.emailRegExp.hasMatch(value)) {
                     return 'Por favor, introduzca un email válido';
                   }
                   return null;
@@ -167,7 +86,7 @@ class _AddNewUserPageState extends State<AddNewUserPage> {
                 height: 15,
               ),
               TextFormField(
-                controller: phoneNumberController,
+                controller: provider.phoneNumberController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, introduzca teléfono ';
@@ -191,18 +110,19 @@ class _AddNewUserPageState extends State<AddNewUserPage> {
               const SizedBox(
                 height: 20,
               ),
-              isLoading
+              provider.isLoading
                   ? const Center(
                       child: CircularProgressIndicator(),
                     )
                   : MaterialButton(
                       onPressed: () {
-                        if (_formKey.currentState!.validate()) {
+                        if (provider.formKey.currentState!.validate()) {
                           if (widget.user != null) {
                             print("Editar Usuario");
-                            updateUser();
+                            provider.updateUser(
+                                context: context, id: widget.user!.docId);
                           } else {
-                            sendUserOnFirebase();
+                            provider.sendUserOnFirebase(context);
                           }
                         } else {}
                       },
