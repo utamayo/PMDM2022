@@ -7,14 +7,14 @@ class SelectAuthPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
+              Text(
                 'Seleccione el método de autenticación',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
