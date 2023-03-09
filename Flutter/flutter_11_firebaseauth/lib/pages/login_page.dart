@@ -9,13 +9,13 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final provider = Provider.of<AuthProvider>(context);
+    final provider = Provider.of<AuthProvider>(context);
     return Consumer<AuthProvider>(builder: (context, model, _) {
       return StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return const Scaffold(
+            return Scaffold(
               body: Padding(
                 padding: EdgeInsets.all(15.0),
                 child: Center(
@@ -25,7 +25,7 @@ class LoginPage extends StatelessWidget {
                       SizedBox(
                         height: 40,
                         child: TextField(
-                          //controller: controller,
+                          controller: provider.emailController,
                           decoration:
                               InputDecoration(prefixIcon: Icon(Icons.email)),
                         ),
@@ -33,7 +33,7 @@ class LoginPage extends StatelessWidget {
                       SizedBox(
                         height: 40,
                         child: TextField(
-                          //controller: controller,
+                          controller: provider.passwordController,
                           decoration:
                               InputDecoration(prefixIcon: Icon(Icons.password)),
                         ),
@@ -43,7 +43,9 @@ class LoginPage extends StatelessWidget {
                         child: Text('Entrar'),
                       ),
                       TextButton(
-                        onPressed: null,
+                        onPressed: () {
+                          provider.registrarUsuario(context);
+                        },
                         child: Text('Registrarse'),
                       ),
                     ],
